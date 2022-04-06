@@ -4,9 +4,7 @@
         <meta charset=utf-8>
         <title>Scouting</title>
         <style>
-            html, body {
-                margin: 0;
-                padding: 0;
+            body {
                 background: #282828;
                 color: #ebdbb2;
                 font-family: monospace, sans-serif;
@@ -16,23 +14,23 @@
                 display: grid;
                 grid-template-columns: 1fr 1fr; /* 2 equal columns */
                 grid-template-rows: repeat(5, 45vh); /* 5 rows */
-                width: 95vw;
-                margin-left: 2.5vw;
-                grid-gap: 20px;
+                width: 90%;
+                margin-left: 5%;
+                column-gap: 25px;
+                row-gap: 25px;
             }
 
             .shot-counter {
                 display: inline-grid;
-                grid-template-columns: 1fr 50px 50px 1fr
+                grid-template-rows: 1fr 50px 50px 1fr
                 background: #3c3836;
+                overflow: hidden;
             }
 
             .shot-counter a {
-                width: 100%;
                 background: #504945;
-                height: 100%;
                 text-align: center;
-                font-size: 5em;
+                font-size: 4em;
                 -webkit-user-select: none;
                 -moz-user-select: none;
                 -ms-user-select: none;
@@ -49,6 +47,21 @@
                 background: #665c54;
                 color: #d79921;
                 border: none;
+                text-align: center;
+            }
+
+            textarea {
+                width: 80vw;
+                font-size: 1em;
+            }
+
+            .form-button {
+                border: none;
+                background: #504945;
+                padding: 1em;
+                width: 10em;
+                font-size: 2em;
+                color: #ebdbb2;
             }
         </style>
     </head>
@@ -132,8 +145,14 @@
             <br>
             <br>
 
-            <button type=reset>Reset form</button>
-            <button type=submit>Submit form</button>
+            Notes:
+            <textarea name="notes"></textarea>
+
+            <br>
+            <br>
+
+            <button class="form-button" type=reset>Reset form</button>
+            <button class="form-button"  type=submit>Submit form</button>
         </form>
     </body>
 </html>

@@ -19,5 +19,6 @@ pub struct RobotMatchInfo {
     pub teleop_low_made: i32,
     pub teleop_low_missed: i32,
     pub climb: Climb,
+    pub notes: String,
 }
 

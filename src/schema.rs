@@ -1,3 +1,4 @@
+use std::fmt::Display;
 use diesel_derive_enum::DbEnum;
 use serde::{Serialize, Deserialize};
 
@@ -8,10 +9,22 @@ pub enum Alliance {
     Blue,
 }
 
+impl Display for Alliance {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{:?}", self)
+    }
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug, DbEnum)]
 pub enum LeftTarmac {
     Yes,
     No,
+}
+
+impl Display for LeftTarmac {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{:?}", self)
+    }
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, DbEnum)]
@@ -24,9 +37,14 @@ pub enum Climb {
     Traversal,
 }
 
+impl Display for Climb {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{:?}", self)
+    }
+}
 
 table! {
-    use diesel::sql_types::Integer;
+    use diesel::sql_types::{Integer, Text};
     use super::{AllianceMapping, LeftTarmacMapping, ClimbMapping};
     data (team, match_number) {
         team -> Integer,
@@ -42,5 +60,6 @@ table! {
         teleop_low_made -> Integer,
         teleop_low_missed -> Integer,
         climb -> ClimbMapping,
+        notes -> Text,
     }
 }

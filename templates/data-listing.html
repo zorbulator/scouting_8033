@@ -2,10 +2,41 @@
 <html>
 <head></head>
 <body>
-<ul>
-{% for matchinfo in data %}
-	<li>{{matchinfo.team}}</li>
+<table>
+<tr>
+    <th>Team</th>
+    <th>Match Number</th>
+    <th>Alliance</th>
+    <th>Left Tarmac</th>
+    <th>Auto High Made</th>
+    <th>Auto High Missed</th>
+    <th>Auto Low Made</th>
+    <th>Auto Low Missed</th>
+    <th>Teleop High Made</th>
+    <th>Teleop High Missed</th>
+    <th>Teleop Low Made</th>
+    <th>Teleop Low Missed</th>
+    <th>Climb</th>
+    <th>Notes</th>
+</tr>
+{% for info in data %}
+<tr>
+    <td>{{info.team}}</td>
+    <td>{{info.match_number}}</td>
+    <td>{{info.alliance}}</td>
+    <td>{{info.left_tarmac}}</td>
+    <td>{{info.auto_high_made}}</td>
+    <td>{{info.auto_high_missed}}</td>
+    <td>{{info.auto_low_made}}</td>
+    <td>{{info.auto_low_missed}}</td>
+    <td>{{info.teleop_high_made}}</td>
+    <td>{{info.teleop_high_missed}}</td>
+    <td>{{info.teleop_low_made}}</td>
+    <td>{{info.teleop_low_missed}}</td>
+    <td>{{info.climb}}</td>
+    <td>{{info.notes}}</td>
+</tr>
 {% endfor %}
-</ul>
+</table>
 </body>
 </html>

@@ -12,5 +12,6 @@ create table data (
     teleop_low_made integer not null,
     teleop_low_missed integer not null,
     climb text check (climb in ('no', 'failed', 'low', 'mid', 'high', 'traversal')) not null,
+    notes text not null,
     primary key (team, match_number)
 )

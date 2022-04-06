@@ -107,7 +107,7 @@ async fn get_data_listing(pool: web::Data<DbPool>) -> HttpResult<HttpResponse> {
     let data_listing: DataListing = web::block(move || -> Result<DataListing, DatabaseError> {
         use crate::schema::data::dsl::*;
         let conn = pool.get()?;
-        let results: Vec<RobotMatchInfo> = data.load(&conn)?;
+        let results: Vec<RobotMatchInfo> = data.order_by(team.asc()).load(&conn)?;
         let listing: DataListing = DataListing{ data: results };
         Ok(listing)
     }).await.map_err(ErrorInternalServerError)?.map_err(ErrorInternalServerError)?;
