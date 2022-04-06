@@ -3,97 +3,135 @@
     <head>
         <meta charset=utf-8>
         <title>Scouting</title>
+        <style>
+            html, body {
+                margin: 0;
+                padding: 0;
+                background: #282828;
+                color: #ebdbb2;
+                font-family: monospace, sans-serif;
+                font-size: 20px;
+            }
+            #shots {
+                display: grid;
+                grid-template-columns: 1fr 1fr; /* 2 equal columns */
+                grid-template-rows: repeat(5, 45vh); /* 5 rows */
+                width: 95vw;
+                margin-left: 2.5vw;
+                grid-gap: 20px;
+            }
+
+            .shot-counter {
+                display: inline-grid;
+                grid-template-columns: 1fr 50px 50px 1fr
+                background: #3c3836;
+            }
+
+            .shot-counter a {
+                width: 100%;
+                background: #504945;
+                height: 100%;
+                text-align: center;
+                font-size: 5em;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+
+            .shot-counter a:hover {
+                background: #665c54;
+            }
+
+            .shot-counter input {
+                width: 100%;
+                font-size: 2em;
+                background: #665c54;
+                color: #d79921;
+                border: none;
+            }
+        </style>
     </head>
     <body>
-        <h3>scouting data</h3>
+        <h2>scouting data</h2>
         <form action=/submit method=POST>
-            <label>
-                Team number:
-                <input type=number value=0 name="team">
-            </label>
-            <label>
-                Match number:
-                <input type=number value=0 name="match_number">
-            </label>
+            <label>Team number:<input type=number value=0 name="team"></label>
+            <br>
+            <label>Match number:<input type=number value=0 name="match_number"></label>
+
+            <br>
 
             Alliance:
-            <label>
-                <input type=radio value="Red" name="alliance">
-                Red
-            </label>
-            <label>
-                <input type=radio value="Blue" name="alliance">
-                Blue
-            </label>
+            <label><input type=radio value="Red" name="alliance">Red</label>
+            <label><input type=radio value="Blue" name="alliance">Blue</label>
+
+            <br>
 
             Left Tarmac:
-            <label>
-                <input type=radio value="Yes" name="left_tarmac">
-                Yes
-            </label>
-            <label>
-                <input type=radio value="No" name="left_tarmac">
-                No
-            </label>
+            <label><input type=radio value="Yes" name="left_tarmac">Yes</label>
+            <label><input type=radio value="No" name="left_tarmac">No</label>
 
-            <label>
-                Auto high port shots:
-                <input type=number value=0 name="auto_high_made">
-            </label>
-            <label>
-                Auto high port misses:
-                <input type=number value=0 name="auto_high_missed">
-            </label>
-            <label>
-                Auto low port shots:
-                <input type=number value=0 name="auto_low_made">
-            </label>
-            <label>
-                Auto low port misses:
-                <input type=number value=0 name="auto_low_missed">
-            </label>
-            <label>
-                Teleop high port shots:
-                <input type=number value=0 name="teleop_high_made">
-            </label>
-            <label>
-                Teleop high port misses:
-                <input type=number value=0 name="teleop_high_missed">
-            </label
-            <label>
-                Teleop low port shots:
-                <input type=number value=0 name="teleop_low_made">
-            </label>
-            <label>
-                Teleop low port misses:
-                <input type=number value=0 name="teleop_low_missed">
-            </label>
+            <br>
+            <br>
+
+            <div id="shots">
+                <div class="shot-counter">
+                    <a onclick="document.getElementById('auto_high_made').stepUp();">+</a><br>
+                    <label>Auto high port shots:<br><input type=number value=0 name="auto_high_made" id="auto_high_made"></label><br>
+                    <a onclick="document.getElementById('auto_high_made').stepDown();">-</a>
+                </div>
+                <div class="shot-counter">
+                    <a onclick="document.getElementById('auto_high_missed').stepUp();">+</a><br>
+                    <label>Auto high port misses:<br><input type=number value=0 name="auto_high_missed" id="auto_high_missed"></label><br>
+                    <a onclick="document.getElementById('auto_high_missed').stepDown();">-</a>
+                </div>
+                <div class="shot-counter">
+                    <a onclick="document.getElementById('auto_low_made').stepUp();">+</a><br>
+                    <label>Auto low port shots:<br><input type=number value=0 name="auto_low_made" id="auto_low_made"></label><br>
+                    <a onclick="document.getElementById('auto_low_made').stepDown();">-</a>
+                </div>
+                <div class="shot-counter">
+                    <a onclick="document.getElementById('auto_low_missed').stepUp();">+</a><br>
+                    <label>Auto low port misses:<br><input type=number value=0 name="auto_low_missed" id="auto_low_missed"></label><br>
+                    <a onclick="document.getElementById('auto_low_missed').stepDown();">-</a>
+                </div>
+                <div></div> <div></div>
+                <div class="shot-counter">
+                    <a onclick="document.getElementById('teleop_high_made').stepUp();">+</a><br>
+                    <label>Teleop high port shots:<br><input type=number value=0 name="teleop_high_made" id="teleop_high_made"></label><br>
+                    <a onclick="document.getElementById('teleop_high_made').stepDown();">-</a>
+                </div>
+                <div class="shot-counter">
+                    <a onclick="document.getElementById('teleop_high_missed').stepUp();">+</a><br>
+                    <label>Teleop high port misses:<br><input type=number value=0 name="teleop_high_missed" id="teleop_high_missed"></label><br>
+                    <a onclick="document.getElementById('teleop_high_missed').stepDown();">-</a>
+                </div>
+                <div class="shot-counter">
+                    <a onclick="document.getElementById('teleop_low_made').stepUp();">+</a><br>
+                    <label>Teleop low port shots:<br><input type=number value=0 name="teleop_low_made" id="teleop_low_made"></label><br>
+                    <a onclick="document.getElementById('teleop_low_made').stepDown();">-</a>
+                </div>
+                <div class="shot-counter">
+                    <a onclick="document.getElementById('teleop_low_missed').stepUp();">+</a><br>
+                    <label>Teleop low port misses:<br><input type=number value=0 name="teleop_low_missed" id="teleop_low_missed"></label><br>
+                    <a onclick="document.getElementById('teleop_low_missed').stepDown();">-</a>
+                </div>
+            </div>
+
+            <br>
+            <br>
 
             Climb:
-            <label>
-                <input type=radio value="No" name="climb">
-                No Climb
-            </label>
-            <label>
-                <input type=radio value="Failed" name="climb">
-                Failed Climb
-            </label>
-            <label>
-                <input type=radio value="Low" name="climb">
-                Low
-            </label>
-            <label>
-                <input type=radio value="Mid" name="climb">
-                Mid
-            </label>
-            <label>
-                <input type=radio value="High" name="climb">
-                High
-            </label>
-            <label>
-                <input type=radio value="Traversal" name="climb">
-                Traversal
-            </label>
+            <label><input type=radio value="No" name="climb">No Climb</label>
+            <label><input type=radio value="Failed" name="climb">Failed Climb</label>
+            <label><input type=radio value="Low" name="climb">Low</label>
+            <label><input type=radio value="Mid" name="climb">Mid</label>
+            <label><input type=radio value="High" name="climb">High</label>
+            <label><input type=radio value="Traversal" name="climb">Traversal</label>
+
+            <br>
+            <br>
+
             <button type=reset>Reset form</button>
             <button type=submit>Submit form</button>
         </form>
