@@ -1,0 +1,15 @@
+[package]
+name = "charts"
+version = "0.3.1"
+authors = ["Iulian Gulea <iulian.gulea@gmail.com>"]
+edition = "2018"
+license = "MIT OR Apache-2.0"
+description = "A pure Rust visualization library inspired by D3.js"
+keywords = ["chart", "plot", "graph", "visualization"]
+categories = ["visualization", "science"]
+repository = "https://github.com/askanium/rustplotlib"
+readme = "README.md"
+
+[dependencies]
+svg="0.10"
+format_num = "0.1.0"
