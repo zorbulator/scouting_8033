@@ -8,33 +8,76 @@
                 background: #282828;
                 color: #ebdbb2;
                 font-family: monospace, sans-serif;
-                font-size: 20px;
+                font-size: 3vh;
             }
+
+            input, label {
+                font-size: 3vh;
+            }
+
+            input[type="radio"] {
+                width: 3vh;
+                height: 3vh;
+            }
+
+            /* Chrome, Safari, Edge, Opera */
+            input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+
+            /* Firefox */
+            input[type=number] {
+                -moz-appearance: textfield;
+            }
+            
             #shots {
                 display: grid;
                 grid-template-columns: 1fr 1fr; /* 2 equal columns */
                 grid-template-rows: repeat(5, 45vh); /* 5 rows */
                 width: 90%;
                 margin-left: 5%;
-                column-gap: 25px;
-                row-gap: 25px;
+                grid-gap: 2vw;
             }
 
             .shot-counter {
                 display: inline-grid;
-                grid-template-rows: 1fr 50px 50px 1fr
+                place-items: stretch;
+                grid-template-rows: 5fr 1fr 5fr;
+                grid-template-columns: 1fr 2fr;
+                grid-template-areas:
+                    "plus  plus"
+                    "label input"
+                    "minus minus";
                 background: #3c3836;
                 overflow: hidden;
+            }
+
+            .shot-counter label {
+                padding: 1em;
+                font-size: 3vmin;
+            }
+
+            .shot-counter a:first-child {
+                grid-area: plus;
+            }
+
+            .shot-counter a:nth-child(4) {
+                grid-area: minus;
             }
 
             .shot-counter a {
                 background: #504945;
                 text-align: center;
-                font-size: 4em;
+                font-size: 15vh;
+                overflow: hidden;
                 -webkit-user-select: none;
                 -moz-user-select: none;
                 -ms-user-select: none;
                 user-select: none;
+                place-self: stretch;
+                touch-action: manipulation;
             }
 
             .shot-counter a:hover {
@@ -43,7 +86,7 @@
 
             .shot-counter input {
                 width: 100%;
-                font-size: 2em;
+                font-size: 3.5em;
                 background: #665c54;
                 color: #d79921;
                 border: none;
@@ -60,17 +103,22 @@
                 background: #504945;
                 padding: 1em;
                 width: 10em;
-                font-size: 2em;
+                font-size: 1em;
                 color: #ebdbb2;
             }
         </style>
     </head>
     <body>
         <h2>scouting data</h2>
+        <a href=/points>Points chart</a>
+        <a href=/data>Raw data</a>
+        <br>
         <form action=/submit method=POST>
-            <label>Team number:<input type=number value=0 name="team"></label>
+            <button class="form-button" type=reset>Reset form</button>
             <br>
-            <label>Match number:<input type=number value=0 name="match_number"></label>
+            <label>Team number:<input type=number name="team"></label>
+            <br>
+            <label>Match number:<input type=number name="match_number"></label>
 
             <br>
 
@@ -89,44 +137,44 @@
 
             <div id="shots">
                 <div class="shot-counter">
-                    <a onclick="document.getElementById('auto_high_made').stepUp();">+</a><br>
-                    <label>Auto high port shots:<br><input type=number value=0 name="auto_high_made" id="auto_high_made"></label><br>
+                    <a onclick="document.getElementById('auto_high_made').stepUp();">+</a>
+                    <label>Auto high port shots:</label><input type=number value=0 name="auto_high_made" id="auto_high_made">
                     <a onclick="document.getElementById('auto_high_made').stepDown();">-</a>
                 </div>
                 <div class="shot-counter">
-                    <a onclick="document.getElementById('auto_high_missed').stepUp();">+</a><br>
-                    <label>Auto high port misses:<br><input type=number value=0 name="auto_high_missed" id="auto_high_missed"></label><br>
+                    <a onclick="document.getElementById('auto_high_missed').stepUp();">+</a>
+                    <label>Auto high port misses:</label><input type=number value=0 name="auto_high_missed" id="auto_high_missed">
                     <a onclick="document.getElementById('auto_high_missed').stepDown();">-</a>
                 </div>
                 <div class="shot-counter">
-                    <a onclick="document.getElementById('auto_low_made').stepUp();">+</a><br>
-                    <label>Auto low port shots:<br><input type=number value=0 name="auto_low_made" id="auto_low_made"></label><br>
+                    <a onclick="document.getElementById('auto_low_made').stepUp();">+</a>
+                    <label>Auto low port shots:</label><input type=number value=0 name="auto_low_made" id="auto_low_made">
                     <a onclick="document.getElementById('auto_low_made').stepDown();">-</a>
                 </div>
                 <div class="shot-counter">
-                    <a onclick="document.getElementById('auto_low_missed').stepUp();">+</a><br>
-                    <label>Auto low port misses:<br><input type=number value=0 name="auto_low_missed" id="auto_low_missed"></label><br>
+                    <a onclick="document.getElementById('auto_low_missed').stepUp();">+</a>
+                    <label>Auto low port misses:</label><input type=number value=0 name="auto_low_missed" id="auto_low_missed">
                     <a onclick="document.getElementById('auto_low_missed').stepDown();">-</a>
                 </div>
                 <div></div> <div></div>
                 <div class="shot-counter">
-                    <a onclick="document.getElementById('teleop_high_made').stepUp();">+</a><br>
-                    <label>Teleop high port shots:<br><input type=number value=0 name="teleop_high_made" id="teleop_high_made"></label><br>
+                    <a onclick="document.getElementById('teleop_high_made').stepUp();">+</a>
+                    <label>Teleop high port shots:</label><input type=number value=0 name="teleop_high_made" id="teleop_high_made">
                     <a onclick="document.getElementById('teleop_high_made').stepDown();">-</a>
                 </div>
                 <div class="shot-counter">
-                    <a onclick="document.getElementById('teleop_high_missed').stepUp();">+</a><br>
-                    <label>Teleop high port misses:<br><input type=number value=0 name="teleop_high_missed" id="teleop_high_missed"></label><br>
+                    <a onclick="document.getElementById('teleop_high_missed').stepUp();">+</a>
+                    <label>Teleop high port misses:</label><input type=number value=0 name="teleop_high_missed" id="teleop_high_missed">
                     <a onclick="document.getElementById('teleop_high_missed').stepDown();">-</a>
                 </div>
                 <div class="shot-counter">
-                    <a onclick="document.getElementById('teleop_low_made').stepUp();">+</a><br>
-                    <label>Teleop low port shots:<br><input type=number value=0 name="teleop_low_made" id="teleop_low_made"></label><br>
+                    <a onclick="document.getElementById('teleop_low_made').stepUp();">+</a>
+                    <label>Teleop low port shots:</label><input type=number value=0 name="teleop_low_made" id="teleop_low_made">
                     <a onclick="document.getElementById('teleop_low_made').stepDown();">-</a>
                 </div>
                 <div class="shot-counter">
-                    <a onclick="document.getElementById('teleop_low_missed').stepUp();">+</a><br>
-                    <label>Teleop low port misses:<br><input type=number value=0 name="teleop_low_missed" id="teleop_low_missed"></label><br>
+                    <a onclick="document.getElementById('teleop_low_missed').stepUp();">+</a>
+                    <label>Teleop low port misses:</label><input type=number value=0 name="teleop_low_missed" id="teleop_low_missed">
                     <a onclick="document.getElementById('teleop_low_missed').stepDown();">-</a>
                 </div>
             </div>
@@ -135,11 +183,17 @@
             <br>
 
             Climb:
+            <br>
             <label><input type=radio value="No" name="climb">No Climb</label>
+            <br>
             <label><input type=radio value="Failed" name="climb">Failed Climb</label>
+            <br>
             <label><input type=radio value="Low" name="climb">Low</label>
+            <br>
             <label><input type=radio value="Mid" name="climb">Mid</label>
+            <br>
             <label><input type=radio value="High" name="climb">High</label>
+            <br>
             <label><input type=radio value="Traversal" name="climb">Traversal</label>
 
             <br>
@@ -151,7 +205,6 @@
             <br>
             <br>
 
-            <button class="form-button" type=reset>Reset form</button>
             <button class="form-button"  type=submit>Submit form</button>
         </form>
     </body>
